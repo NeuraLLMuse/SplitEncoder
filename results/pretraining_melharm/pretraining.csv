@@ -1,0 +1,1 @@
+epoch,step,train_loss,train_loss_mel,train_loss_harm,train_acc_mel,train_acc_harm,train_ppl_mel,train_ppl_harm,train_te_mel,train_te_harm,val_loss,val_loss_mel,val_loss_harm,val_acc_mel,val_acc_harm,val_ppl_mel,val_ppl_harm,val_te_mel,val_te_harm,sav_version

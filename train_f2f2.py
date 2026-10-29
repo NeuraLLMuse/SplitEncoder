@@ -13,24 +13,24 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-suffix_prefix = 'SELaC'
+suffix_prefix = 'f2f2f'
 
-batchsize = 128
+batchsize = 64
 device_name = 'cuda:0'
 lr = 1e-4
 epochs = 300
 
-train_hook = os.getenv('TRAIN_HOOK')
-val_hook = os.getenv('VAL_HOOK')
+train_hook = os.getenv('HOOK_CA_TRAIN')
+val_hook = os.getenv('HOOK_CA_VAL')
 
-train_gjt = os.getenv('TRAIN_GJT')
-val_gjt = os.getenv('VAL_GJT')
+train_gjt = os.getenv('JAZZ_CA_TRAIN')
+val_gjt = os.getenv('JAZZ_CA_VAL')
 
-train_nott = os.getenv('TRAIN_NOTT')
-val_nott = os.getenv('VAL_NOTT')
+train_nott = os.getenv('NOTT_CA_TRAIN')
+val_nott = os.getenv('NOTT_CA_VAL')
 
-train_wiki = os.getenv('TRAIN_WIKI')
-val_wiki = os.getenv('VAL_WIKI')
+train_wiki = os.getenv('WIKI_CA_TRAIN')
+val_wiki = os.getenv('WIKI_CA_VAL')
 
 def main():
     tokenizer = CSGridMLMTokenizer(
