@@ -15,7 +15,7 @@ load_dotenv()
 
 suffix_prefix = 'melharm'
 
-batchsize = 16
+batchsize = 32
 device_name = 'cuda:0'
 lr = 1e-4
 epochs = 300

@@ -374,7 +374,7 @@ def validation_melharm(model, valloader, mask_token_id, bar_token_id, \
                     val_token_entropy[mh_key] = running_token_entropy[mh_key]/batch_num
 
                 tepoch.set_postfix(loss=val_loss, accuracy=val_accuracy)
-                tepoch.set_postfix_str(f'acc={val_accuracy['mel']:.3f}|{val_accuracy['harm']:.3f}, loss={val_loss_mel:.3f}|{val_loss_harm:.3f}' )
+                tepoch.set_postfix_str(f"acc={val_accuracy['mel']:.3f}|{val_accuracy['harm']:.3f}, loss={val_loss_mel:.3f}|{val_loss_harm:.3f}" )
             # end for batch
     # end with tqdm
     if transformer_path is not None:
@@ -532,7 +532,7 @@ def train_melharm(
                     running_token_entropy[mh_key] += entropy_per_batch
                     train_token_entropy[mh_key] = running_token_entropy[mh_key]/batch_num
 
-                tepoch.set_postfix_str(f'acc={train_accuracy['mel']:.3f}|{train_accuracy['harm']:.3f}, loss={train_loss_mel:.3f}|{train_loss_harm:.3f}' )
+                tepoch.set_postfix_str(f"acc={train_accuracy['mel']:.3f}|{train_accuracy['harm']:.3f}, loss={train_loss_mel:.3f}|{train_loss_harm:.3f}" )
                 step += 1
                 if step%(total_steps//(epochs*validations_per_epoch)) == 0 or step == total_steps:
                     best_val_loss, saving_version = validation_melharm(
