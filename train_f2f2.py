@@ -18,19 +18,20 @@ suffix_prefix = 'f2f2f'
 batchsize = 32
 device_name = 'cuda:0'
 lr = 1e-4
-epochs = 300
+data_variation = '12' # 'CA'
+epochs = 300 if data_variation == '12' else 30
 
-train_hook = os.getenv('HOOK_CA_TRAIN')
-val_hook = os.getenv('HOOK_CA_VAL')
+train_hook = os.getenv(f'HOOK_{data_variation}_TRAIN')
+val_hook = os.getenv(f'HOOK_{data_variation}_VAL')
 
-train_gjt = os.getenv('JAZZ_CA_TRAIN')
-val_gjt = os.getenv('JAZZ_CA_VAL')
+train_gjt = os.getenv(f'JAZZ_{data_variation}_TRAIN')
+val_gjt = os.getenv(f'JAZZ_{data_variation}_VAL')
 
-train_nott = os.getenv('NOTT_CA_TRAIN')
-val_nott = os.getenv('NOTT_CA_VAL')
+train_nott = os.getenv(f'NOTT_{data_variation}_TRAIN')
+val_nott = os.getenv(f'NOTT_{data_variation}_VAL')
 
-train_wiki = os.getenv('WIKI_CA_TRAIN')
-val_wiki = os.getenv('WIKI_CA_VAL')
+train_wiki = os.getenv(f'WIKI_{data_variation}_TRAIN')
+val_wiki = os.getenv(f'WIKI_{data_variation}_VAL')
 
 def main():
     tokenizer = CSGridMLMTokenizer(
@@ -97,12 +98,12 @@ def main():
 
     # save results
     os.makedirs('results', exist_ok=True)
-    os.makedirs(f'results/pretraining_{suffix_prefix}/', exist_ok=True)
-    results_path = f'results/pretraining_{suffix_prefix}/pretraining.csv'
+    os.makedirs(f'results/pretraining_{suffix_prefix}_{data_variation}/', exist_ok=True)
+    results_path = f'results/pretraining_{suffix_prefix}_{data_variation}/pretraining.csv'
 
     os.makedirs('saved_models/', exist_ok=True)
-    os.makedirs(f'saved_models/{suffix_prefix}_pretrained/', exist_ok=True)
-    save_dir = f'saved_models/{suffix_prefix}_pretrained/'
+    os.makedirs(f'saved_models/{suffix_prefix}_pretrained_{data_variation}/', exist_ok=True)
+    save_dir = f'saved_models/{suffix_prefix}_pretrained_{data_variation}/'
     transformer_path = save_dir + 'pretrained.pt'
 
     train_f2f2f(
@@ -111,7 +112,8 @@ def main():
         exponent=5,
         results_path=results_path,
         transformer_path=transformer_path,
-        bar_token_id=tokenizer.bar_token_id
+        bar_token_id=tokenizer.bar_token_id,
+        validations_per_epoch=1 if data_variation == 'CA' else 10
     )
 
 # end main
