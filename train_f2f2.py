@@ -15,7 +15,7 @@ load_dotenv()
 
 suffix_prefix = 'f2f2f'
 
-batchsize = 32
+batchsize = 16
 device_name = 'cuda:0'
 lr = 1e-4
 data_variation = '12' # 'CA'

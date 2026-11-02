@@ -15,7 +15,7 @@ load_dotenv()
 
 suffix_prefix = 'melharm'
 
-batchsize = 32
+batchsize = 16
 device_name = 'cuda:0'
 lr = 1e-4
 data_variation = '12' # 'CA'
@@ -98,12 +98,12 @@ def main():
 
     # save results
     os.makedirs('results', exist_ok=True)
-    os.makedirs(f'results/pretraining_{suffix_prefix}/', exist_ok=True)
-    results_path = f'results/pretraining_{suffix_prefix}/pretraining.csv'
+    os.makedirs(f'results/pretraining_{suffix_prefix}_{data_variation}/', exist_ok=True)
+    results_path = f'results/pretraining_{suffix_prefix}_{data_variation}/pretraining.csv'
 
     os.makedirs('saved_models/', exist_ok=True)
-    os.makedirs(f'saved_models/{suffix_prefix}_pretrained/', exist_ok=True)
-    save_dir = f'saved_models/{suffix_prefix}_pretrained/'
+    os.makedirs(f'saved_models/{suffix_prefix}_pretrained_{data_variation}/', exist_ok=True)
+    save_dir = f'saved_models/{suffix_prefix}_pretrained_{data_variation}/'
     transformer_path = save_dir + 'pretrained.pt'
 
     train_melharm(
