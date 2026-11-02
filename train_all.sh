@@ -7,8 +7,11 @@
 
 # List of Python scripts with their respective arguments
 scripts=(
-    "train_f2f2.py"
-    "train_melharm.py"
+    "train_f2f2.py -d CA -g 0"
+    "train_melharm.py -d CA -g 0"
+
+    "train_f2f2.py -d 12 -g 1"
+    # "train_melharm.py -d 12 -g 1"
 )
 
 # Name of the conda environment

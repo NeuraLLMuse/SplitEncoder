@@ -9,31 +9,48 @@ from torch.nn import CrossEntropyLoss
 import os
 from train_utils import train_melharm
 from dotenv import load_dotenv
+import argparse
 
 # Load environment variables from .env file
 load_dotenv()
 
-suffix_prefix = 'melharm'
-
-batchsize = 16
-device_name = 'cuda:0'
-lr = 1e-4
-data_variation = 'CA' # '12'
-epochs = 300 if data_variation == '12' else 30
-
-train_hook = os.getenv(f'HOOK_{data_variation}_TRAIN')
-val_hook = os.getenv(f'HOOK_{data_variation}_VAL')
-
-train_gjt = os.getenv(f'JAZZ_{data_variation}_TRAIN')
-val_gjt = os.getenv(f'JAZZ_{data_variation}_VAL')
-
-train_nott = os.getenv(f'NOTT_{data_variation}_TRAIN')
-val_nott = os.getenv(f'NOTT_{data_variation}_VAL')
-
-train_wiki = os.getenv(f'WIKI_{data_variation}_TRAIN')
-val_wiki = os.getenv(f'WIKI_{data_variation}_VAL')
-
 def main():
+    # Create the argument parser
+    parser = argparse.ArgumentParser(description='Script for training a selected contrastive space.')
+
+    # Define arguments
+    parser.add_argument('-d', '--data', type=str, help='Whether training on CA or 12.', required=True)
+    parser.add_argument('-g', '--gpu', type=int, help='Specify whether and which GPU will be used by used by index. Not using this argument means use CPU.', required=False)
+
+    # Parse the arguments
+    args = parser.parse_args()
+
+    suffix_prefix = 'melharm'
+
+    batchsize = 16
+    device_name = 'cuda:0'
+    lr = 1e-4
+    data_variation = 'CA' # '12'
+    if args.data is not None:
+        data_variation = args.data
+    device_name = 'cpu'
+    if args.gpu is not None:
+        if args.gpu > -1:
+            device_name = 'cuda:' + str(args.gpu)
+    epochs = 20 if data_variation == '12' else 200
+
+    train_hook = os.getenv(f'HOOK_{data_variation}_TRAIN')
+    val_hook = os.getenv(f'HOOK_{data_variation}_VAL')
+
+    train_gjt = os.getenv(f'JAZZ_{data_variation}_TRAIN')
+    val_gjt = os.getenv(f'JAZZ_{data_variation}_VAL')
+
+    train_nott = os.getenv(f'NOTT_{data_variation}_TRAIN')
+    val_nott = os.getenv(f'NOTT_{data_variation}_VAL')
+
+    train_wiki = os.getenv(f'WIKI_{data_variation}_TRAIN')
+    val_wiki = os.getenv(f'WIKI_{data_variation}_VAL')
+
     tokenizer = CSGridMLMTokenizer(
         fixed_length=80,
         quantization='4th',
