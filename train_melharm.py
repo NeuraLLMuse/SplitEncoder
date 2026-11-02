@@ -18,7 +18,7 @@ suffix_prefix = 'melharm'
 batchsize = 16
 device_name = 'cuda:0'
 lr = 1e-4
-data_variation = '12' # 'CA'
+data_variation = 'CA' # '12'
 epochs = 300 if data_variation == '12' else 30
 
 train_hook = os.getenv(f'HOOK_{data_variation}_TRAIN')

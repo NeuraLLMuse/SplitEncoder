@@ -7,11 +7,17 @@
 
 # List of Python scripts with their respective arguments
 scripts=(
-    "generate_for_folder.py -i JAZZ_VAL -o MIDIs/jazz_f2f2f -c saved_models/f2f2f_pretrained/pretrained.pt -g 1"
-    "generate_for_folder.py -i JAZZ_VAL -o MIDIs/jazz_melharm -c saved_models/melharm_pretrained/pretrained.pt -g 1"
+    "generate_for_folder.py -i JAZZ_VAL -o MIDIs/jazz_f2f2f_12 -c saved_models/f2f2f_pretrained_12/pretrained.pt -n 0 -g 1"
+    "generate_for_folder.py -i JAZZ_VAL -o MIDIs/jazz_melharm_12 -c saved_models/melharm_pretrained_12/pretrained.pt -n 0 -g 1"
 
-    "generate_for_folder.py -i NOTT_VAL -o MIDIs/jazz_f2f2f -c saved_models/f2f2f_pretrained/pretrained.pt -g 1"
-    "generate_for_folder.py -i NOTT_VAL -o MIDIs/jazz_melharm -c saved_models/melharm_pretrained/pretrained.pt -g 1"
+    "generate_for_folder.py -i NOTT_VAL -o MIDIs/nott_f2f2f_12 -c saved_models/f2f2f_pretrained_12/pretrained.pt -g -n 0 1"
+    "generate_for_folder.py -i NOTT_VAL -o MIDIs/nott_melharm_12 -c saved_models/melharm_pretrained_12/pretrained.pt -n 0 -g 1"
+
+    "generate_for_folder.py -i JAZZ_CA_VAL -o MIDIs/jazz_f2f2f_CA -c saved_models/f2f2f_pretrained_CA/pretrained.pt -n 1 -g 1"
+    "generate_for_folder.py -i JAZZ_CA_VAL -o MIDIs/jazz_melharm_CA -c saved_models/melharm_pretrained_CA/pretrained.pt -n 1 -g 1"
+
+    "generate_for_folder.py -i NOTT_CA_VAL -o MIDIs/nott_f2f2f_CA -c saved_models/f2f2f_pretrained_CA/pretrained.pt -n 1 -g 1"
+    "generate_for_folder.py -i NOTT_CA_VAL -o MIDIs/nott_melharm_CA -c saved_models/melharm_pretrained_CA/pretrained.pt -n 1 -g 1"
 )
 
 # Name of the conda environment

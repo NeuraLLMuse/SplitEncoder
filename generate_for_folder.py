@@ -23,6 +23,7 @@ def main():
     parser.add_argument('-i', '--folder_in', type=str, help='Folder with midi pieces to harmonize.', required=True)
     parser.add_argument('-o', '--folder_out', type=str, help='Folder to place the generated melodic harmonizations.', required=True)
     parser.add_argument('-c', '--checkpoint', type=str, help='Model path. Defaults to vanilla checkpoint.', required=False)
+    parser.add_argument('-n', '--normalization', type=int, help='Tonality normalization to CA. Defaults to 1 (True).', required=False)
     parser.add_argument('-g', '--gpu', type=int, help='Specify whether and which GPU will be used by used by index. Not using this argument means use CPU.', required=False)
 
     # Parse the arguments
@@ -39,6 +40,9 @@ def main():
     checkpoint = None
     if args.checkpoint is not None:
         checkpoint = args.checkpoint
+    normalize_tonality = True
+    if args.normalization is not None:
+        normalize_tonality = bool(args.normalization)
     
     tokenizer = CSGridMLMTokenizer(
         fixed_length=80,
@@ -81,7 +85,7 @@ def main():
             name_suffix=f'{piece_name}',
             use_constraints=False,
             intertwine_bar_info=True,
-            normalize_tonality=True,
+            normalize_tonality=normalize_tonality,
             temperature=1.0,
             p=0.9,
             unmasking_order='certain',
